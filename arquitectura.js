@@ -153,10 +153,37 @@ Attacker.prototype = Object.create(Component.prototype);
 Attacker.prototype.constructor = Attacker;
 
 Attacker.prototype.receive = function(message) {
-    if(message instanceof Presence) {
+    if(message instanceof Presence){// && !(message instanceof Sleeper)) {
         if(message.who.type != this.entity.type) {
             this.messageQueue.push(new Attack(this.entity, message.who));
         }
+    }
+};
+//////////////////////////////////////////////////////////////////////////////
+function Sleeper(entity) {//si la entidad esta dormida no puede enviar mensajes
+    Component.call(this, entity);
+}
+Sleep.prototype = Object.create(Component.prototype);
+Sleep.prototype.constructor = Sleep;
+
+Sleep.prototype.receive = function(message) {
+    if(message instanceof Presence) {
+        if(message.who.type != this.entity.type) {
+            this.messageQueue.push(new Sleep(this.entity, message.who));
+        }
+    }
+};
+
+//////////////////////////////////////////////////////////////////////////////
+function WakeUp(entity) {
+    Component.call(this, entity);
+}
+WakeUp.prototype = Object.create(Component.prototype);
+WakeUp.prototype.constructor = Defender;
+
+WakeUp.prototype.receive = function(message) {
+    if(message instanceof Sleep) {
+        console.log(this.entity.entityName + " has wake Wake Up");
     }
 };
 
@@ -191,19 +218,28 @@ function Attack(who, receiver) {
 }
 Attack.prototype = Object.create(Message.prototype);
 Attack.prototype.constructor = Attack;
-
+//////////////////////////////////////////////////////////////////////////////
+function Sleep(who, receiver){
+    Message.call(this, receiver);
+    this.who = who;
+}
+Sleep.prototype = Object.create(Message.prototype);
+Sleep.prototype.constructor = Sleep;
 //////////////////////////////////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////////////////////////////////////
 
 // helper functions creating new components
 var attacker = function() { return new Attacker(); };
+var sleeper = function(){return new Sleeper(); };
+var wakeUp = function(){return new WakeUp(); };
 var defender = function() { return new Defender(); };
 
 // entities in the game
-var link = new Entity("link", EntityType.GOOD, [attacker(), defender()]);
+var link = new Entity("link", EntityType.GOOD, [attacker(), defender()];//, sleeper(), wakeUp()]);
 var ganon = new Entity("ganon", EntityType.EVIL, [attacker(), defender()]);
-var octorok = new Entity("octorok", EntityType.EVIL, [defender()]);
+var octorok = new Entity("octorok", EntityType.EVIL, [defender()]//, sleeper()]);
 var armos = new Entity("armos", EntityType.EVIL, [attacker()]);
 
 // we create the game with the entities
