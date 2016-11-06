@@ -19,7 +19,12 @@ var lib = module.exports = {
     get wand() {
       return new items.Weapon('wand', 5);
     },
-    // Implementa los colmillos y el pseudópodo
+    get pseudopode() {
+      return new items.Weapon('pseudopode', 5);
+    },   
+    get fangs() {
+      return new items.Weapon('fangs', 10);
+    },
   },
 
   characters: {
@@ -33,8 +38,19 @@ var lib = module.exports = {
         mp: 30
       });
     },
+    get heroWizard() {
+      return new Character('wizard', {
+        initiative: 4,
+        weapon: lib.weapons.wand,
+        defense: 50,
+        hp: 40,
+        maxHp: 40,
+        mp: 100,
+        maxMp: 100
+      });
+    },
 
-    // Implementa el mago
+ 
 
     get monsterSkeleton() {
       return new Character('skeleton', {
@@ -42,11 +58,35 @@ var lib = module.exports = {
         defense: 50,
         weapon: lib.weapons.sword,
         hp: 100,
-        mp: 0
+        mp: 0,
+        mxHp:100,
+        maxMp:0
+      });
+    },
+        get monsterSlime() {
+      return new Character('slime', {
+        initiative: 2,
+        defense: 40,
+        weapon: lib.weapons.pseudopode,
+        hp: 40,
+        mp: 50,
+        mxHp:40,
+        maxMp:50
+      });
+    },
+        get monsterBat() {
+      return new Character('bat', {
+        initiative: 30,
+        defense: 80,
+        weapon: lib.weapons.fangs,
+        hp: 5,
+        mp: 0,
+        mxHp:5,
+        maxMp:0
       });
     },
 
-    // Implementa el limo y el murciélago
+    
   },
 
   scrolls: {
@@ -56,6 +96,9 @@ var lib = module.exports = {
     },
 
     // Implementa la bola de fuego
+    get fireball() {
+      return new items.Scroll('fireball', 30, new Effect({ hp: -25 }));
+    },
 
   }
 };
