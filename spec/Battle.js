@@ -1,6 +1,6 @@
 var mockery = require('mockery');
 
-describe('Battle type', function () {
+xdescribe('Battle type', function () {
   'use strict';
 
   var Battle;
@@ -68,7 +68,7 @@ describe('Battle type', function () {
     battle.stop();
   });
 
-  describe('Battle API', function () {
+  xdescribe('Battle API', function () {
 
     it('is completely defined.', function () {
       expect(battle).toEqual(jasmine.any(EventEmitter));
