@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('The TurnList type', function () {
+describe('The TurnList type', function () {
   var TurnList = require('../src/TurnList');
   var turnList;
   var characters;
@@ -31,7 +31,7 @@ xdescribe('The TurnList type', function () {
     expect(turnList.list).toEqual(['c', 'b', 'a']);
   });
 
-  xit('accepts a set of characters and sort them by inititative.', function () {
+  it('accepts a set of characters and sort them by inititative.', function () {
     var turn = turnList.next();
 
     expect(turn.number).toBe(1);
