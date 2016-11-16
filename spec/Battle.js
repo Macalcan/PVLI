@@ -93,7 +93,7 @@ describe('Battle type', function () {
 
   });
 
- xdescribe('Start', function () {
+ describe('Start', function () {
 
     it('includes the characters who are going to fight by party.',
     function (done) {
@@ -123,7 +123,7 @@ describe('Battle type', function () {
       battle.start();
     });
 
-    xit('ignore dead characters.', function (done) {
+    it('ignore dead characters.', function (done) {
       fastEnemy.hp = 0;
       currentSetup.monsters.members.push(characters.fastEnemy);
       battle.setup(currentSetup);

@@ -82,7 +82,7 @@ Battle.prototype._extractCharactersById = function (parties) {
 
   function assignParty(characters, party) {
     // Cambia la party de todos los personajes a la pasada como parámetro.
-    for (var i in characters){
+    for(var i in characters){
     	characters[i].party = party;
     }
   }
@@ -91,12 +91,14 @@ Battle.prototype._extractCharactersById = function (parties) {
     // Genera nombres únicos de acuerdo a las reglas
     // de generación de identificadores que encontrarás en
     // la descripción de la práctica o en la especificación.
-    for(var i in character){
-    	if(character[i].name === undefined){
-    		character[i].
-    	}
+    if(!idCounters.hasOwnProperty(character.name)){
+    	idCounters[character.name] = 0;
+    	return character.name;
     }
-
+    else{
+    	idCounters[character.name]++;
+    	return character.name + '' + (idCounters[character.name]);
+    }
   }
 };
 
@@ -142,14 +144,6 @@ Battle.prototype._checkEndOfBattle = function () {
 
   function isAlive(character) {
     // Devuelve true si el personaje está vivo.
-    
-    if(character.hp === 0){
-		return true;
-    }
-    else{
-		return false;
-    }
-    
   }
 
   function getCommonParty(characters) {
