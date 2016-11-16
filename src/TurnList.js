@@ -12,21 +12,28 @@ TurnList.prototype.reset = function (charactersById) {
 };
 
 TurnList.prototype.next = function () {
-this.turnNumber++;
 var turn= {};
-turn.number = this.turnNumber;
 turn.list = this.list;
-var i=0;
-while(i<this.list.length && !this._charactersById[turn.list[i]].isDead()) {
-i++;}
-//i--;
+this._turnIndex = 0;
 
-turn.activeCharacterId = turn.list[i];
+// se asigna fuera del bucle también para que no sea undefined
+this.activeCharacterId = this.list[this._turnIndex]; 
+turn.activeCharacterId = this.activeCharacterId;
+
+while (this._turnIndex < this.list.length && this._charactersById[turn.activeCharacterId].isDead()) {
+  this.activeCharacterId = this.list[this._turnIndex];
+  turn.activeCharacterId = this.activeCharacterId;
+  this._turnIndex++;
+}
+
+turn.activeCharacterId = this.activeCharacterId; // volvemos a asignarlo para que party no sea undefined
 turn.party = this._charactersById[turn.activeCharacterId].party;
-this.activeCharacterId = turn.activeCharacterId;
+
+this.turnNumber++;
+turn.number = this.turnNumber;
+
 return turn;
 };
-
 
 TurnList.prototype._sortByInitiative = function () {
 var characters = [];
@@ -34,16 +41,16 @@ var initiative =[];
 
 for(var name in this._charactersById){
   characters.push({party: name, initiative: this._charactersById[name].initiative});
-};
+}
   characters.sort(function (a,b){
     if ( a !== null && b !== null){//aseguras que a y b no son undefined
-      if(a.initiative > b.initiative)
+      if(a.initiative - b.initiative > 0)
         return -1;
-      else if(a.initiative <b.initiative)
+      else if(a.initiative - b.initiative < 0)
         return 1;
       return 0;
     }
-  })
+  });
 
   for(var nombre in characters){
     initiative.push(characters[nombre].party);
