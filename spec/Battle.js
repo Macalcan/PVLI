@@ -68,7 +68,7 @@ describe('Battle type', function () {
     battle.stop();
   });
 
-  xdescribe('Battle API', function () {
+  describe('Battle API', function () {
 
     it('is completely defined.', function () {
       expect(battle).toEqual(jasmine.any(EventEmitter));
@@ -93,11 +93,7 @@ describe('Battle type', function () {
 
   });
 
-<<<<<<< HEAD
  describe('Start', function () {
-=======
-  xdescribe('Start', function () {
->>>>>>> 202ab9f50858935a33c54905f973c7f44d503c2b
 
     it('includes the characters who are going to fight by party.',
     function (done) {
@@ -116,7 +112,7 @@ describe('Battle type', function () {
 
   xdescribe('Turns', function () {
 
-    xit('include relevant info.', function (done) {
+    it('include relevant info.', function (done) {
       battle.on('turn', function (turn) {
         expect(turn).toBeDefined();
         expect(turn.number).toBe(1);
@@ -127,7 +123,7 @@ describe('Battle type', function () {
       battle.start();
     });
 
-    it('ignore dead characters.', function (done) {
+    xit('ignore dead characters.', function (done) {
       fastEnemy.hp = 0;
       currentSetup.monsters.members.push(characters.fastEnemy);
       battle.setup(currentSetup);
@@ -173,7 +169,7 @@ describe('Battle type', function () {
 
     xdescribe('Defend action', function () {
 
-      xit('informs of the result.', function (done) {
+      it('informs of the result.', function (done) {
         var currentDefense = fastEnemy.defense;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
 
@@ -193,7 +189,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases defense feature by 10%.', function (done) {
+      it('increases defense feature by 10%.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -213,7 +209,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases the odds of defending against attack.', function (done) {
+      it('increases the odds of defending against attack.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -238,7 +234,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases the odds of defending against cast.', function (done) {
+      it('increases the odds of defending against cast.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -267,7 +263,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xt('accumulates turn by turn.', function (done) {
+      it('accumulates turn by turn.', function (done) {
         var currentDefense = fastEnemy.defense;
         var expectedDefense =
             Math.ceil(Math.ceil(currentDefense * 1.1) * 1.1);
@@ -308,7 +304,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('does not allow to choose a dead character.', function (done) {
+      it('does not allow to choose a dead character.', function (done) {
         currentSetup.heroes.members[1].hp = 0;
         battle.setup(currentSetup);
 
@@ -325,7 +321,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('applies weapon effect if defense roll fails.', function (done) {
+      it('applies weapon effect if defense roll fails.', function (done) {
         fakeD100 = 100;
         var tankHealth = heroTank.hp;
         var clawsDamage = fastEnemy.weapon.effect.hp;
@@ -346,7 +342,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('doesn\'t apply weapon effect if defense roll passes.',
+      it('doesn\'t apply weapon effect if defense roll passes.',
        function (done) {
         fakeD100 = 1;
         var tankHealth = heroTank.hp;
@@ -367,7 +363,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('always applies weapon effect if the attack comes from an ally.',
+      it('always applies weapon effect if the attack comes from an ally.',
       function (done) {
         heroWizard.defense = 100;
         fakeD100 = 1;
@@ -394,7 +390,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after attacking an ally.', function (done) {
+      it('informs after attacking an ally.', function (done) {
         battle.on('turn', function (turn) {
           if (turn.number === 2) {
             this.on('info', function (info) {
@@ -415,7 +411,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after attacking a foe passing the defense roll.',
+      it('informs after attacking a foe passing the defense roll.',
       function (done) {
         fakeD100 = 100;
         battle.on('turn', function (turn) {
@@ -439,7 +435,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after attacking a foe failing the defense roll.',
+      it('informs after attacking a foe failing the defense roll.',
       function (done) {
         fakeD100 = 1;
         battle.on('turn', function (turn) {
@@ -463,7 +459,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('can be cancelled.', function (done) {
+      it('can be cancelled.', function (done) {
         battle.on('turn', function () {
           this.options.select('attack');
           this.options.cancel();
@@ -508,7 +504,7 @@ describe('Battle type', function () {
            battle.start();
          });
 
-      xit('(cast) makes the target\'s defense to be restored.',
+      it('(cast) makes the target\'s defense to be restored.',
       function (done) {
         var originalDefense = fastEnemy.defense;
 
@@ -555,7 +551,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('requires to choose a target after the scroll.', function (done) {
+      it('requires to choose a target after the scroll.', function (done) {
         battle.on('turn', function () {
           this.options.select('cast');
           this.options.select('Health');
@@ -569,7 +565,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('costs mp.', function (done) {
+      it('costs mp.', function (done) {
         var enemyMp = fastEnemy.mp;
         var fireCost = scrolls.fire.cost;
         var expectedMp = enemyMp - fireCost;
@@ -591,7 +587,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('requires enough mp', function (done) {
+      it('requires enough mp', function (done) {
         fastEnemy.mp = 10;
         battle.setup(currentSetup);
 
@@ -604,7 +600,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('applies scroll effect if defense roll fails.', function (done) {
+      it('applies scroll effect if defense roll fails.', function (done) {
         fakeD100 = 100;
         var enemyHealth = fastEnemy.hp;
         var fireDamage = samples.scrolls.fire.effect.hp;
@@ -632,7 +628,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('doesn\'t apply weapon effect if defense roll passes.',
+      it('doesn\'t apply weapon effect if defense roll passes.',
       function (done) {
         fakeD100 = 1;
         var enemyHealth = fastEnemy.hp;
@@ -660,7 +656,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('always applies weapon effect if the attack comes from an ally.',
+      it('always applies weapon effect if the attack comes from an ally.',
       function (done) {
         heroTank.defense = 100;
         fakeD100 = 1;
@@ -691,7 +687,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('can be cancelled.', function (done) {
+      it('can be cancelled.', function (done) {
         battle.on('turn', function () {
           this.options.select('attack');
           this.options.cancel();
@@ -706,7 +702,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('can go back to scroll selection.', function (done) {
+      it('can go back to scroll selection.', function (done) {
         battle.on('turn', function () {
           this.options.select('cast');
           this.options.select('Health');
@@ -721,7 +717,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after casting on an ally.', function (done) {
+      it('informs after casting on an ally.', function (done) {
         battle.on('turn', function (turn) {
           if (turn.number === 3) {
             this.on('info', function (info) {
@@ -744,7 +740,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after casting on a foe failing the defense roll.',
+      it('informs after casting on a foe failing the defense roll.',
       function (done) {
         fakeD100 = 100;
         battle.on('turn', function (turn) {
@@ -770,7 +766,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after casting on a foe passing the defense roll.',
+      it('informs after casting on a foe passing the defense roll.',
       function (done) {
         fakeD100 = 1;
         battle.on('turn', function (turn) {
@@ -833,7 +829,7 @@ describe('Battle type', function () {
       battle.start();
     });
 
-    xit('are won by monsters.', function (done) {
+    it('are won by monsters.', function (done) {
       heroTank.defense = 0;
       heroWizard.defense = 0;
       battle.setup(currentSetup);

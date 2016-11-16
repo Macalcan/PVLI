@@ -2,7 +2,7 @@
 
 var mockery = require('mockery');
 
-describe('OptionsStack type', function () {
+xdescribe('OptionsStack type', function () {
   var OptionsStack;
   var optionsStack;
 
