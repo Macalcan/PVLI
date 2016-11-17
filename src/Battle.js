@@ -190,6 +190,16 @@ Battle.prototype._onAction = function (action) {
   };
   // Debe llamar al método para la acción correspondiente:
   // defend -> _defend; attack -> _attack; cast -> _cast
+   if(action === 'defend'){
+    this._defend();
+  }
+  else if(action === 'attack'){
+    this._attack();
+  }
+  else if(action === 'cast'){
+    this._cast();
+  }
+  
 };
 
 Battle.prototype._defend = function () {
@@ -203,6 +213,9 @@ Battle.prototype._defend = function () {
 Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];
   // Implementa la mejora de la defensa del personaje.
+  this._charactersById[targetId]._defense = Math.ceil(this._charactersById[targetId]._defense * 1.1);
+
+  return this._charactersById[targetId]._defense;
 };
 
 Battle.prototype._restoreDefense = function (targetId) {
