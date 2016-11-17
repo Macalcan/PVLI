@@ -212,7 +212,7 @@ Battle.prototype._defend = function () {
 };
 
 Battle.prototype._improveDefense = function (targetId) {
-  var states = this._states[targetId];//guardas la defensa inicial en una variable
+  var states = this._states[targetId].defense;//guardas la defensa inicial en una variable
   // Implementa la mejora de la defensa del personaje.
   //es la defensa actual que se va modificando cada turno
   states = this._charactersById[targetId].defense;
@@ -250,7 +250,7 @@ Battle.prototype._cast = function () {
   var self = this;
   self._showScrolls(function onScroll(scrollId, scroll) {
     // Implementa lo que pasa cuando se ha seleccionado el hechizo.
-    // Implementa lo que pasa cuando se ha seleccionado el hechizo.
+
   self._showTargets(function onTarget(targetId) {
    
     self._action.targetId = targetId;
@@ -311,10 +311,10 @@ Battle.prototype._showScrolls = function (onSelection) {
   var magic = this._charactersById[this._action.activeCharacterId].mp;
   for(var i in this._grimories[HerEne]){
     var coste = this._grimories[HerEne][i].cost
-    if(magic >= coste) Scrolls[i] = this._grimories[HerEne][i];
+    if(coste <= magic) Scrolls[i] = this._grimories[HerEne][i];
   }
-  this.options.current = Scrolls;
-  this.options.current.on('chose', onSelection);
+  
+  Scrolls.on('chose', onSelection);
 };
 
 module.exports = Battle;
