@@ -321,7 +321,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('applies weapon effect if defense roll fails.', function (done) {
+      it('applies weapon effect if defense roll fails.', function (done) {
         fakeD100 = 100;
         var tankHealth = heroTank.hp;
         var clawsDamage = fastEnemy.weapon.effect.hp;
@@ -342,7 +342,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('doesn\'t apply weapon effect if defense roll passes.',
+      it('doesn\'t apply weapon effect if defense roll passes.',
        function (done) {
         fakeD100 = 1;
         var tankHealth = heroTank.hp;

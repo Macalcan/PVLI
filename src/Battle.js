@@ -235,7 +235,9 @@ Battle.prototype._attack = function () {
 
   self._showTargets(function onTarget(targetId) {
     // Implementa lo que pasa cuando se ha seleccionado el objetivo.
-    
+    self._action.effect = self._charactersById[self._action.activeCharacterId].weapon.effect;
+    self._action.targetId = targetId;
+
     self._executeAction();
     self._restoreDefense(targetId);
     
