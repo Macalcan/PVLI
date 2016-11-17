@@ -304,7 +304,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('does not allow to choose a dead character.', function (done) {
+      it('does not allow to choose a dead character.', function (done) {
         currentSetup.heroes.members[1].hp = 0;
         battle.setup(currentSetup);
 

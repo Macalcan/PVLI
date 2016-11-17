@@ -215,7 +215,8 @@ Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];//guardas la defensa inicial en una variable
   // Implementa la mejora de la defensa del personaje.
   //es la defensa actual que se va modificando cada turno
-  this._charactersById[targetId]._defense = Math.ceil(this._charactersById[targetId]._defense * 1.1);
+  var mejora = this._charactersById[targetId]._defense;
+  this._charactersById[targetId]._defense = Math.ceil(mejora * 1.1);
   return this._charactersById[targetId]._defense;
 };
 
@@ -223,19 +224,21 @@ Battle.prototype._restoreDefense = function (targetId) {
   // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
   // Puedes utilizar el atributo this._states[targetId] para llevar tracking
   // de las defensas originales.
-  var oldDefense = this._states[targetId];
+  /*var oldDefense = this._states[targetId];
   this._charactersById[targetId]._defense = oldDefense;
-  return this._charactersById[targetId]._defense;
+  return this._charactersById[targetId]._defense;*/
 };
 
 Battle.prototype._attack = function () {
   var self = this;
   //lista de opciones con los personajes a elegir para atacar
-  self.options.current = self._charactersById; 
+
   self._showTargets(function onTarget(targetId) {
     // Implementa lo que pasa cuando se ha seleccionado el objetivo.
+    
     self._executeAction();
     self._restoreDefense(targetId);
+    
   });
 };
 
@@ -268,6 +271,19 @@ Battle.prototype._informAction = function () {
 Battle.prototype._showTargets = function (onSelection) {
   // Toma ejemplo de la función ._showActions() para mostrar los identificadores
   // de los objetivos.
+  this.options.current = {};
+  for(var i in this._charactersById){
+    if(this._charactersById[i].hp > 0){
+      //haciendo un log de this.options.current se puede observar
+      //que tiene un objeto vacio (_group) donde se meten los nombres de los caracteres
+      this.options.current._group[this._charactersById[i].name] = true;
+    }
+  }
+   /*this.options.current = {
+    'Tank': true,
+    'Wizz': true,
+    'Fasty': true
+  };*/
 
   this.options.current.on('chose', onSelection);
 };
