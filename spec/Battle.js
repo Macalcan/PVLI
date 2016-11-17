@@ -390,7 +390,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after attacking an ally.', function (done) {
+      it('informs after attacking an ally.', function (done) {
         battle.on('turn', function (turn) {
           if (turn.number === 2) {
             this.on('info', function (info) {
@@ -411,7 +411,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after attacking a foe passing the defense roll.',
+      it('informs after attacking a foe passing the defense roll.',
       function (done) {
         fakeD100 = 100;
         battle.on('turn', function (turn) {
@@ -435,7 +435,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('informs after attacking a foe failing the defense roll.',
+      it('informs after attacking a foe failing the defense roll.',
       function (done) {
         fakeD100 = 1;
         battle.on('turn', function (turn) {
@@ -459,7 +459,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('can be cancelled.', function (done) {
+      it('can be cancelled.', function (done) {
         battle.on('turn', function () {
           this.options.select('attack');
           this.options.cancel();
@@ -476,9 +476,9 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Acting on a target with improved defense', function () {
+    describe('Acting on a target with improved defense', function () {
 
-      xit('(attack) makes the target\'s defense to be restored.',
+      it('(attack) makes the target\'s defense to be restored.',
          function (done) {
            var originalDefense = fastEnemy.defense;
 
@@ -536,7 +536,7 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Cast action', function () {
+    describe('Cast action', function () {
 
       it('requires to choose an scroll.', function (done) {
         battle.on('turn', function () {
@@ -796,7 +796,7 @@ describe('Battle type', function () {
 
   });
 
-  xdescribe('Some battles', function () {
+  describe('Some battles', function () {
 
     it('are won by heroes.', function (done) {
       heroTank.defense = 0;

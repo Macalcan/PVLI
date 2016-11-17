@@ -250,6 +250,17 @@ Battle.prototype._cast = function () {
   var self = this;
   self._showScrolls(function onScroll(scrollId, scroll) {
     // Implementa lo que pasa cuando se ha seleccionado el hechizo.
+    // Implementa lo que pasa cuando se ha seleccionado el hechizo.
+  self._showTargets(function onTarget(targetId) {
+   
+    self._action.targetId = targetId;
+    self._action.scrollName = scrollId;
+    self._action.effect = scroll.effect
+    self._charactersById[self._action.activeCharacterId].mp -= scroll.cost;
+    self._executeAction();
+    self._restoreDefense(targetId);
+  });
+
 
   });
 };
@@ -293,8 +304,16 @@ Battle.prototype._showTargets = function (onSelection) {
 };
 
 Battle.prototype._showScrolls = function (onSelection) {
+  var Scrolls = {};
   // Toma ejemplo de la función anterior para mostrar los hechizos. Estudia
   // bien qué parámetros se envían a los listener del evento chose.
+  var HerEne = this._charactersById[this._action.activeCharacterId].party;
+  var magic = this._charactersById[this._action.activeCharacterId].mp;
+  for(var i in this._grimories[HerEne]){
+    var coste = this._grimories[HerEne][i].cost
+    if(magic >= coste) Scrolls[i] = this._grimories[HerEne][i];
+  }
+  this.options.current = Scrolls;
   this.options.current.on('chose', onSelection);
 };
 
