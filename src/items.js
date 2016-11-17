@@ -3,16 +3,13 @@
 function Item(name, effect) {
   this.name = name;
   this.effect = effect;
-  this.effect.hp = 5;
-  this.effect.mp = 5;
 }
 
 function Weapon(name, damage, extraEffect) {
   extraEffect = extraEffect || new Effect({});
-  Weapon = Item.prototype.constructor;
   Item.call(this, name, extraEffect);
   extraEffect.hp = - damage;
-  extraEffect.mp = - damage;
+  this.effect = extraEffect;
 }
 Weapon.prototype = Object.create(Item.prototype);
 Weapon.prototype.constructor = Weapon;
@@ -38,7 +35,7 @@ Scroll.prototype.canBeUsed = function (mp) {
 
 function Effect(variations) {
   for(var name in variations){
-    this[name] =variations[name];
+    this[name] = variations[name];
   }
 }
 

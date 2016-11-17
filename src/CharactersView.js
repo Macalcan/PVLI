@@ -55,6 +55,7 @@ CharactersView.prototype._getViewFor = function (character) {
       },
       set: function (value) {
       // ¿Y este setter para ignorar cualquier acción?
+      return value - value;
       },
       enumerable: true
     });

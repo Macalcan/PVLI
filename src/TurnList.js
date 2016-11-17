@@ -12,7 +12,7 @@ TurnList.prototype.reset = function (charactersById) {
 };
 
 TurnList.prototype.next = function () {
-var turn= {};
+var turn = {};
 turn.list = this.list;
 this._turnIndex = 0;
 
@@ -20,13 +20,15 @@ this._turnIndex = 0;
 this.activeCharacterId = this.list[this._turnIndex]; 
 turn.activeCharacterId = this.activeCharacterId;
 
-while (this._turnIndex < this.list.length && this._charactersById[turn.activeCharacterId].isDead()) {
+//en la condicion del bucle he hecho el salto de linea por el lint
+while (this._turnIndex < this.list.length 
+  && this._charactersById[turn.activeCharacterId].isDead()) {
   this.activeCharacterId = this.list[this._turnIndex];
   turn.activeCharacterId = this.activeCharacterId;
   this._turnIndex++;
 }
-
-turn.activeCharacterId = this.activeCharacterId; // volvemos a asignarlo para que party no sea undefined
+// volvemos a asignarlo para que party no sea undefined
+this.activeCharacterId = turn.activeCharacterId; 
 turn.party = this._charactersById[turn.activeCharacterId].party;
 
 this.turnNumber++;
@@ -37,7 +39,7 @@ return turn;
 
 TurnList.prototype._sortByInitiative = function () {
 var characters = [];
-var initiative =[];
+var initiative = [];
 
 for(var name in this._charactersById){
   characters.push({party: name, initiative: this._charactersById[name].initiative});

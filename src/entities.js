@@ -20,7 +20,7 @@ var lib = module.exports = {
       return new items.Weapon('wand', 5);
     },
     get pseudopode() {
-      return new items.Weapon('pseudopode', 5);
+      return new items.Weapon('pseudopode', 5, new Effect({ mp: -5}));
     },   
     get fangs() {
       return new items.Weapon('fangs', 10);

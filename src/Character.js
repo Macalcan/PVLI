@@ -22,33 +22,23 @@ Character.prototype.isDead = function () {
 };
 
 Character.prototype.applyEffect = function (effect, isAlly) {
-   if(isAlly){
-  
-  this.party += effect.party || this.party;
-  this.initiative += effect.initiative || this.initiative;
-  this._defense = effect.defense + this._defense || this._defense;
-  this._hp = effect.hp + this._hp || this._hp;
-  this._mp = effect.mp + this._mp || this._mp;
-  this.maxHp = effect.maxHp + this.maxHp || this.maxHp ;
-  this.maxMp = effect.maxMp + this.maxMp  || this.maxMp;
-  return true;
-
+   
+   if(isAlly) {
+      for (var i in effect) {
+        this[i] += effect[i];
+      }
+    return true;
   }
 
-  else { 
+  else {
+    
     if (dice.d100() >= this._defense){
-
-  this.party += effect.party || this.party;
-  this.initiative += effect.initiative || this.initiative;
-  this._defense = effect.defense + this._defense || this._defense;
-  this._hp = effect.hp + this._hp || this._hp;
-  this._mp = effect.mp + this._mp || this._mp;
-  this.maxHp = effect.maxHp + this.maxHp || this.maxHp;
-  this.maxMp = effect.maxMp + this.maxMp  || this.maxMp;
-  return true;
-  }
-
-  else return false;
+      for (var j in effect) {
+        this[j] += effect[j];
+      }
+      return true;
+    }
+    else return false;
   }
 };
 
