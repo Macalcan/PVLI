@@ -157,7 +157,7 @@ Battle.prototype._checkEndOfBattle = function () {
     // de que no haya común.
     var partyIsCommon = true;
     var commonParties = characters[0].party;
-    var i = 1;
+    var i = 0;
     while(i < characters.length && partyIsCommon){
         if(commonParties !== characters[i].party){
           partyIsCommon = false;
@@ -215,6 +215,7 @@ Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];//guardas la defensa inicial en una variable
   // Implementa la mejora de la defensa del personaje.
   //es la defensa actual que se va modificando cada turno
+  states = this._charactersById[targetId].defense;
   var mejora = this._charactersById[targetId]._defense;
   this._charactersById[targetId]._defense = Math.ceil(mejora * 1.1);
   return this._charactersById[targetId]._defense;

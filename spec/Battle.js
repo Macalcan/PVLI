@@ -363,7 +363,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('always applies weapon effect if the attack comes from an ally.',
+      it('always applies weapon effect if the attack comes from an ally.',
       function (done) {
         heroWizard.defense = 100;
         fakeD100 = 1;
